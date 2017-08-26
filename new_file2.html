@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width: 100px;height: 100px;margin-top: 100px;">
+			<img data-src="img01.png" width="100px" height="100px" style="margin-top: 1px;" class="lazyLoad"/>
+		</div>
+		<div style="width: 100px;height: 100px;margin-top: 300px;">
+			<img data-src="img01.png" width="100px" height="100px" style="margin-top: 1px;" class="lazyLoad"/>
+		</div>
+		<div style="width: 100px;height: 100px;margin-top: 300px;">
+			<img data-src="img01.png" width="100px" height="100px" style="margin-top: 1px;" class="lazyLoad"/>
+		</div>
+		<div style="width: 100px;height: 100px;margin-top: 300px;">
+			<img data-src="img01.png" width="100px" height="100px" style="margin-top: 1px;" class="lazyLoad"/>
+		</div>
+		
+		<script type="text/javascript">
+			var imgArray=document.getElementsByClassName("lazyLoad");
+			var len=imgArray.length;
+			
+			for (var i = 0; i < len; i++) {
+				var oHeight=imgArray[i].offsetTop;
+				//可视区域
+				var height=document.documentElement.clientHeight;
+				if (oHeight<height) {
+					imgArray[i].src=imgArray[i].getAttribute("data-src");
+				}
+			}
+			
+			window.onscroll=function(){
+				for (var i = 0; i < len; i++) {
+					var oHeight=imgArray[i].offsetTop;
+					//可视区域
+					var height=document.documentElement.clientHeight;
+					//滚动条距离顶部高度
+					var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+					if (height+scrollTop>oHeight) {
+						if (imgArray[i].src=="") {
+							imgArray[i].src=imgArray[i].getAttribute("data-src");
+						}
+					}
+				}
+			};
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div style="width: 100px;height: 100px;margin-top: 100px;">
+			<img data-src="img01.png" width="100px" height="100px" style="margin-top: 1px;" id="img01"/>
+		</div>
+		
+		<script type="text/javascript">
+			var img01=document.getElementById('img01');
+			//元素距离顶部的高度
+			var oHeight=img01.offsetTop;
+			//可视区域
+			var height=document.documentElement.clientHeight;
+			if(oHeight<height){
+				img01.src=img01.getAttribute("data-src");
+			}
+			
+			window.onscroll=function () {
+				
+				//可视区域
+				var height=document.documentElement.clientHeight;
+				//滚动条距离顶部高度
+				var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+				if (height+scrollTop>oHeight) {
+					img01.src=img01.getAttribute("data-src");
+				}
+			}
+		</script>
+	</body>
+</html>
